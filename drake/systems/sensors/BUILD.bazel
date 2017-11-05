@@ -26,6 +26,7 @@ drake_cc_library(
         ":rgbd_camera",
         ":rgbd_renderer",
         ":rotary_encoders",
+        ":symbolic_render",
     ],
 )
 
@@ -85,6 +86,7 @@ drake_cc_library(
     ],
     deps = [
         "//drake/common:essential",
+        "//drake/common:symbolic",
         "//drake/common:reinit_after_move",
     ],
 )
@@ -222,6 +224,39 @@ drake_cc_library(
         "@vtk//:vtkRenderingOpenGL2",
     ],
 )
+
+drake_cc_library(
+    name = "symbolic_render",
+    srcs = ["symbolic_render.cc"],
+    hdrs = ["symbolic_render.h"],
+    deps = [
+        ":image",
+        "//drake/common:symbolic",
+        "//drake/multibody:rigid_body_frame",
+        "//drake/multibody:rigid_body_tree",
+        "//drake/systems/framework",
+        "//drake/systems/primitives",
+        "@eigen",
+    ],
+)
+
+drake_cc_binary(
+    name = "symbolic_render_example",
+    srcs = [
+        "symbolic_render_example.cc",
+    ],
+    deps = [
+        ":image",
+        ":symbolic_render",
+        "//drake/common:symbolic",
+        "//drake/multibody:rigid_body_frame",
+        "//drake/multibody:rigid_body_tree",
+        "//drake/systems/framework",
+        "//drake/systems/primitives",
+        "@eigen",
+    ],
+)
+
 
 drake_cc_binary(
     name = "rgbd_camera_publish_lcm_example",

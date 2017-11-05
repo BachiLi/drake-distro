@@ -42,6 +42,9 @@ using ImageLabel16I = Image<PixelType::kLabel16I>;
 using ImageGrey8U = Image<PixelType::kGrey8U>;
 
 
+using ImageExpr = Image<PixelType::kExpr>;
+
+
 /// Simple data format for Image. For the complex calculation with the image,
 /// consider converting this to other libaries' Matrix data format, i.e.,
 /// MatrixX in Eigen, Mat in OpenCV, and so on.

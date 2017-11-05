@@ -1,5 +1,6 @@
 #pragma once
 
+#include "drake/common/symbolic.h"
 #include <cstdint>
 
 namespace drake {
@@ -30,6 +31,8 @@ enum class PixelType {
   kDepth32F,
   /// The pixel format used by ImageLabel16I.
   kLabel16I,
+
+  kExpr,
 };
 
 
@@ -51,6 +54,8 @@ enum class PixelFormat {
   kDepth,
   /// The pixel format used for all the labe images.
   kLabel,
+
+  kExpr,
 };
 
 /// Traits class for Image.
@@ -111,6 +116,13 @@ struct ImageTraits<PixelType::kGrey8U> {
   typedef uint8_t ChannelType;
   static constexpr int kNumChannels = 1;
   static constexpr PixelFormat kPixelFormat = PixelFormat::kGrey;
+};
+
+template <>
+struct ImageTraits<PixelType::kExpr> {
+  typedef drake::symbolic::Expression ChannelType;
+  static constexpr int kNumChannels = 1;
+  static constexpr PixelFormat kPixelFormat = PixelFormat::kExpr;
 };
 
 }  // namespace sensors

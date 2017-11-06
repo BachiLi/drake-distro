@@ -76,34 +76,28 @@ int main() {
                   {v1_x,  1.0}, {v1_y, -1.0}, {v1_z, 0.0},
                   {v2_x,  0.0}, {v2_y,  1.0}, {v2_z, 0.0}};
 
-    Matrix4<double> cam_to_world_eval;
-    for (int i = 0; i < 4; i++) {
-      for (int j = 0; j < 4; j++) {
-        cam_to_world_eval(i, j) = cam_to_world(i, j).Evaluate(env);
-      }
-    }
 
   Expression hit_triangle = render(cam_to_world, tri_v0, tri_v1, tri_v2, x, y, aspect_ratio);
 
-    ImageGrey8U img(img_width, img_height);
-    for (int yi = 0; yi < img_height; yi++) {
-      for (int xi = 0; xi < img_width; xi++) {
-        env[sx] = (xi + 0.5) / img_width;
-        env[sy] = (yi + 0.5) / img_height;
-        double val = hit_triangle.Evaluate(env);
-        *img.at(xi, yi) = uint8_t(std::min(val, 1.0) * 255.0);
-      }
+  ImageGrey8U img(img_width, img_height);
+  for (int yi = 0; yi < img_height; yi++) {
+    for (int xi = 0; xi < img_width; xi++) {
+      env[sx] = (xi + 0.5) / img_width;
+      env[sy] = (yi + 0.5) / img_height;
+      double val = hit_triangle.Evaluate(env);
+      *img.at(xi, yi) = uint8_t(std::min(val, 1.0) * 255.0);
     }
+  }
 
-    std::fstream fs("./image.ppm", std::fstream::out);
-    fs << "P3\n" << img_width << " " << img_height << "\n" << 255 << "\n";
-    for (int yi = 0; yi < img_height; yi++) {
-      for (int xi = 0; xi < img_width; xi++) {
-        int val = int(*img.at(xi, yi));
-        fs << val << " " << val << " " << val << " ";
-      }
+  std::fstream fs("./image.ppm", std::fstream::out);
+  fs << "P3\n" << img_width << " " << img_height << "\n" << 255 << "\n";
+  for (int yi = 0; yi < img_height; yi++) {
+    for (int xi = 0; xi < img_width; xi++) {
+      int val = int(*img.at(xi, yi));
+      fs << val << " " << val << " " << val << " ";
     }
-    fs.close();
+  }
+  fs.close();
 
   return 0;
 }

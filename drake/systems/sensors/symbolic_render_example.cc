@@ -13,36 +13,36 @@ inline Vector3<Expression> normalize(const Vector3<Expression> &vec) {
 Matrix4<Expression> look_at(const Vector3<Expression> &pos,
                           const Vector3<Expression> &look,
                           const Vector3<Expression> &up) {
-    Expression m[4][4];
-    // Initialize fourth column of viewing matrix
-    m[0][3] = pos[0];
-    m[1][3] = pos[1];
-    m[2][3] = pos[2];
-    m[3][3] = Expression{1.0};
+  Expression m[4][4];
+  // Initialize fourth column of viewing matrix
+  m[0][3] = pos[0];
+  m[1][3] = pos[1];
+  m[2][3] = pos[2];
+  m[3][3] = Expression{1.0};
 
-    // Initialize first three columns of viewing matrix
-    Vector3<Expression> dir = normalize(look - pos);
-    Vector3<Expression> left = normalize(normalize(up).cross(dir));
-    Vector3<Expression> new_up = dir.cross(left);
-    m[0][0] = left[0];
-    m[1][0] = left[1];
-    m[2][0] = left[2];
-    m[3][0] = Expression{0.0};
-    m[0][1] = new_up[0];
-    m[1][1] = new_up[1];
-    m[2][1] = new_up[2];
-    m[3][1] = Expression{0.0};
-    m[0][2] = dir[0];
-    m[1][2] = dir[1];
-    m[2][2] = dir[2];
-    m[3][2] = Expression{0.0};
+  // Initialize first three columns of viewing matrix
+  Vector3<Expression> dir = normalize(look - pos);
+  Vector3<Expression> left = normalize(normalize(up).cross(dir));
+  Vector3<Expression> new_up = dir.cross(left);
+  m[0][0] = left[0];
+  m[1][0] = left[1];
+  m[2][0] = left[2];
+  m[3][0] = Expression{0.0};
+  m[0][1] = new_up[0];
+  m[1][1] = new_up[1];
+  m[2][1] = new_up[2];
+  m[3][1] = Expression{0.0};
+  m[0][2] = dir[0];
+  m[1][2] = dir[1];
+  m[2][2] = dir[2];
+  m[3][2] = Expression{0.0};
 
-    Matrix4<Expression> mat;
-    mat << m[0][0], m[0][1], m[0][2], m[0][3],
-           m[1][0], m[1][1], m[1][2], m[1][3],
-           m[2][0], m[2][1], m[2][2], m[2][3],
-           m[3][0], m[3][1], m[3][2], m[3][3];
-    return mat;
+  Matrix4<Expression> mat;
+  mat << m[0][0], m[0][1], m[0][2], m[0][3],
+         m[1][0], m[1][1], m[1][2], m[1][3],
+         m[2][0], m[2][1], m[2][2], m[2][3],
+         m[3][0], m[3][1], m[3][2], m[3][3];
+  return mat;
 }
 
 int main() {

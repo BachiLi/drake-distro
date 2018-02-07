@@ -91,7 +91,7 @@ Additional Rules
 
     #!/usr/bin/env python
 
-  Rationale: ``/usr/bin/env`` enables a ``PATH`` search for python. On OSX
+  Rationale: ``/usr/bin/env`` enables a ``PATH`` search for python. On macOS
   systems configured for Drake, this gives a better result than
   ``/usr/bin/python``.
 
@@ -161,7 +161,7 @@ refer to resources like mesh files via a ``package://`` syntax, whose full paths
 are resolved by the ``package.xml`` files.
 
 When adding a model to Drake
-(typically in `drake-distro/drake/examples/ <https://github.com/RobotLocomotion/drake/tree/master/drake/examples>`_),
+(typically in `drake/examples/ <https://github.com/RobotLocomotion/drake/tree/master/examples>`_),
 you will need to add a ``package.xml`` file to the example's directory to enable
 modeling files like URDF and SDF to refer to resources like mesh files contained
 within the example's directory. Please ensure that your ``package.xml`` file
@@ -171,7 +171,7 @@ The following minimal ``package.xml`` file can get you started::
 
     <!--
     This XML file is used by:
-      drake-distro/drake/systems/plants/xmlUtil.cpp
+      drake/systems/plants/xmlUtil.cpp
     Method:
       searchDirectory()
     -->

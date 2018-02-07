@@ -1,67 +1,44 @@
 #!/bin/bash
 #
-# Prerequisite set-up script for a Drake build on Mac.
+# Install development prerequisites for source distributions of Drake on macOS.
 
 set -euo pipefail
 
-if [[ "${EUID}" -eq 0 ]]; then
-  echo "This script must NOT be run as root" >&2
-  exit 1
-fi
+# Dependencies that are installed by the following sourced script that are
+# needed when developing with binary distributions are also needed when
+# developing with source distributions.
+
+source "${BASH_SOURCE%/*}/install_prereqs_binary_distribution.sh"
+
+# The following additional dependencies are only needed when developing with
+# source distributions.
 
 if ! command -v javac &>/dev/null; then
-  echo "Java is NOT installed" >&2
-  exit 2
+  echo 'Java JDK is NOT installed' >&2
+  exit 4
 fi
-
-if ! command -v brew &>/dev/null; then
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
-if [[ ! -f /usr/include/expat.h || ! -f /usr/include/zlib.h ]]; then
-  echo "Command Line Tools for Xcode are NOT installed" >&2
-  exit 3
-fi
-
-brew tap homebrew/science
-brew tap robotlocomotion/director
-
-brew update
-brew upgrade
 
 brew install $(tr '\n' ' ' <<EOF
 bash-completion
 bazel
-boost
 clang-format
-cmake
 diffstat
 doxygen
-glew
-glib
 graphviz
-ipopt
-libyaml
-lz4
-nlopt
-numpy
+kcov
 patchutils
 pkg-config
-protobuf@2.6
-python
-scipy
-tinyxml
-tinyxml2
-vtk@8.0
-yaml-cpp
 EOF
 )
 
 pip2 install --upgrade $(tr '\n' ' ' <<EOF
-lxml
-pip
+matplotlib
 pygame
-PyYAML
 Sphinx
 EOF
 )
+
+# The preceding only needs to be run once per machine. The following sourced
+# script should be run once per user who develops with source distributions.
+
+source "${BASH_SOURCE%/*}/install_prereqs_user_environment.sh"

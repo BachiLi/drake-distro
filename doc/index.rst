@@ -1,24 +1,7 @@
 
-.. image:: images/under_construction.png
-	:width: 39%
-
 .. image:: images/logo_w_text.jpg
+	:align: center   
 	:width: 60%
-
-******************************
-Important Note (October, 2016)
-******************************
-
-
-Drake is currently undergoing a major renovation, with all of the core
-libraries moving into C++.  The examples will move and the existing APIs will
-change.  During this time, we recommend that users either engage deeply
-(contributing examples/tests which provide coverage of your use cases) or wait
-for a few months until the APIs have stabilized.  For a stable release, consider
-checking out `this SHA <https://github.com/RobotLocomotion/drake/tree/last_sha_with_windows_support>`_.
-
-This change is fantastically exciting -- Drake is becoming a mature and powerful
-tool.  Thank you for your patience.
 
 
 ********
@@ -34,7 +17,7 @@ While there are an increasing number of simulation tools available for robotics,
 
 Here is a quick summary of capabilities:
 
-* Modeling Dynamical Systems
+* `Modeling Dynamical Systems <http://drake.mit.edu/doxygen_cxx/group__systems.html>`_
 	* C++ `block-diagram <http://drake.mit.edu/doxygen_cxx/classdrake_1_1systems_1_1_diagram_builder.html#details>`_  modeling environment with support for:
 		* Continuous, discrete, hybrid, event-triggered, and multi-rate systems
 		* `Stochastic systems <http://drake.mit.edu/doxygen_cxx/stochastic_systems.html>`_

@@ -119,6 +119,24 @@ drake_cc_binary(
     ],
 )
 
+drake_cc_binary(
+    name = "dreal_render",
+    srcs = [
+        "dreal_render.cc",
+    ],
+    deps = [
+        ":symbolic_render",
+        "//drake/common:symbolic",
+        "//drake/multibody:rigid_body_frame",
+        "//drake/multibody:rigid_body_tree",
+        "//drake/solvers:dreal_solver",
+        "//drake/systems/framework",
+        "//drake/systems/primitives",
+        "//drake/systems/sensors:image",
+        "@eigen",
+    ],
+)
+
 drake_cc_googletest(
     name = "pose_aggregator_test",
     deps = [

@@ -4,7 +4,8 @@
 
 namespace drake {
 namespace systems {
-namespace sensors {
+
+using namespace sensors;
 
 inline Vector3<Expression> normalize(const Vector3<Expression> &vec) {
   return vec / vec.norm();
@@ -103,10 +104,9 @@ int main() {
   return 0;
 }
 
-}  // namespace sensors
 }  // namespace systems
 }  // namespace drake
 
 int main(int argc, char* argv[]) {
-  return drake::systems::sensors::main();
+  return drake::systems::main();
 }

@@ -1,6 +1,6 @@
 # -*- python -*-
 
-load("//tools:drake.bzl", "drake_cc_googletest", "drake_cc_library")
+load("//tools:drake.bzl", "drake_cc_googletest", "drake_cc_library", "drake_cc_binary")
 load("//tools/lint:lint.bzl", "add_lint_tests")
 
 package(default_visibility = ["//visibility:public"])
@@ -83,6 +83,38 @@ drake_cc_library(
         "//drake/lcmtypes:viewer",
         "//drake/math:geometric_transform",
         "//drake/multibody/shapes",
+        "@eigen",
+    ],
+)
+
+drake_cc_library(
+    name = "symbolic_render",
+    srcs = ["symbolic_render.cc"],
+    hdrs = ["symbolic_render.h"],
+    deps = [
+        "//drake/common:symbolic",
+        "//drake/multibody:rigid_body_frame",
+        "//drake/multibody:rigid_body_tree",
+        "//drake/systems/framework",
+        "//drake/systems/primitives",
+        "//drake/systems/sensors:image",
+        "@eigen",
+    ],
+)
+
+drake_cc_binary(
+    name = "symbolic_render_example",
+    srcs = [
+        "symbolic_render_example.cc",
+    ],
+    deps = [
+        ":symbolic_render",
+        "//drake/common:symbolic",
+        "//drake/multibody:rigid_body_frame",
+        "//drake/multibody:rigid_body_tree",
+        "//drake/systems/framework",
+        "//drake/systems/primitives",
+        "//drake/systems/sensors:image",
         "@eigen",
     ],
 )

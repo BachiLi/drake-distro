@@ -1,4 +1,4 @@
-#include "symbolic_render.h"
+#include "drake/systems/rendering/symbolic_render.h"
 
 namespace drake {
 namespace systems {

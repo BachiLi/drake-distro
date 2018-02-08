@@ -1,4 +1,4 @@
-#include "symbolic_render.h"
+#include "drake/systems/rendering/symbolic_render.h"
 
 #include <fstream>
 
@@ -11,8 +11,8 @@ inline Vector3<Expression> normalize(const Vector3<Expression> &vec) {
 }
 
 Matrix4<Expression> look_at(const Vector3<Expression> &pos,
-                          const Vector3<Expression> &look,
-                          const Vector3<Expression> &up) {
+                            const Vector3<Expression> &look,
+                            const Vector3<Expression> &up) {
   Expression m[4][4];
   // Initialize fourth column of viewing matrix
   m[0][3] = pos[0];
@@ -77,7 +77,8 @@ int main() {
                   {v2_x,  0.0}, {v2_y,  1.0}, {v2_z, 0.0}};
 
 
-  Expression hit_triangle = render(cam_to_world, tri_v0, tri_v1, tri_v2, x, y, aspect_ratio);
+  Expression hit_triangle =
+      render(cam_to_world, tri_v0, tri_v1, tri_v2, x, y, aspect_ratio);
 
   ImageGrey8U img(img_width, img_height);
   for (int yi = 0; yi < img_height; yi++) {
